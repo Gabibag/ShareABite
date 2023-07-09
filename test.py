@@ -10,7 +10,7 @@ name = 'multican.jpg'
 reader = easyocr.Reader(['en']) 
 result = reader.readtext(name)
 
-food = ""
+food = " "
 
 for x in result: 
     food = food + x[1] + " "
