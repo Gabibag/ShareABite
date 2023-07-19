@@ -79,6 +79,24 @@ def getDatabase():
     return st
 
 
+@app.route('/api/saveInfo', methods=['post'])
+def saveInfo():
+    name = request.json['name']
+    location = request.json['location']
+    phone = request.json['phone']
+    print(name)
+    print(location)
+    print(phone)
+    conn = sqlite3.connect('database.sqlite')
+    cur = conn.cursor()
+    cur.execute("INSERT INTO organizations (name, address, foods, phone) VALUES (?, ?, ?, ?)",
+                (name, location, "rice", phone)
+                )
+    conn.commit()
+    conn.close()
+
+    return "saved"
+
 @app.post('/api/imageRec')
 def imageRec():
     file = request.files['file']

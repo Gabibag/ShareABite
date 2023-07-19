@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <link rel="stylesheet" href="/style/all.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <body>
    
@@ -34,17 +35,28 @@
 
     <div id="infoGrid">
         <div id="info1" class="infoCard">
-            Name of Organization <br>
-            Address <br>
-            Phone <br>
-            <button id="saveInfo" class = "save">Save Info</button>
-            <button id="saveAccount" class = "save">Save info to Account</button>
-            
+            <div id="infoText">
+                Name of Organization: <input id="nameInput" class="inputInfo"> <br>
+                Address: <input id="addressInput" class="inputInfo"> <br>
+                Phone: <input id="phoneInput" class="inputInfo"> <br>
+            </div>
+            <div id="buttonContainer">
+                <button id="saveInfo" class = "save">Save Info</button>
+                <button id="saveAccount" class = "save">Save info to Account</button>
+            </div>
             
         </div>
         <div id="info2" class="infoCard">
-            <button id="request" class="bigButtons" onclick="window.location='/organize'">Request Food</button>
-            If you’re an organization accepting food donations, let the donors know what you need and watch the donations  roll in!
+            <div id="infoText">
+                Food Category: <input id="categoryInput" class="inputInfo"> 
+                <span id="quantity">Quantity:</span> <input id="quantityInput" class="inputInfo"> <br>
+                <span id="desc">Description:</span> <input id="descInput" class="inputInfo"> <br>
+                <div id="check"> </div>
+                Will accept other donations as well. <br>
+            </div>
+            
+                <button id="submit" class="save">Submit</button>
+               
             
         </div>
     </div>   
@@ -54,29 +66,92 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap');
     
+
+
+    .inputInfo{
+        border: none;
+        border-bottom: #5EAF6B solid;
+        font-size: 2vw;
+        font-family: "Darumadrop One", cursive;
+        transition: 0.2s;
+    }
+    #categoryInput{
+        width: 55%;
+    }
+    #quantityInput{
+        border-left:#5EAF6B solid;
+        border-right:#5EAF6B solid;
+        border-top:#5EAF6B solid;
+        border-radius: 30px;
+        width: 10%;
+    }
+    #descInput{
+        border-left:#5EAF6B solid;
+        border-right:#5EAF6B solid;
+        border-top:#5EAF6B solid;
+        border-radius: 30px;
+        width: 80%;
+        height: 10vw;
+    }
+    #nameInput{
+        width: 69%;
+    }
+    #addressInput{
+        width: 87.1%;
+    }
+    #phoneInput{
+        width: 89.3%;
+    }
+    .inputInfo:focus{
+        outline: none;
+        background-color:#cce0d0;
+    }
+    #desc{
+        vertical-align: text-bottom;
+        
+    }
     .save{
         border: none;
         border-radius: 60px;
         border-color: #5EAF6B;
         background: #5EAF6B;
         color: white; 
-        width: 30vw;
-        height: 5vw;
+        width: 45%;
+        height: 20%;
         font-family: Darumadrop One;
         font-size: 2vw;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
         text-align: center;
-        margin-bottom: 7vh;
+        margin-left: 3%;
         transition: 0.3s;
     }
+    #buttonContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 5vh;
+        vertical-align: bottom;
 
+    }
+    .save:hover{
+        background: #5EAF6B;
+        transform: translateY(-1px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    .save:active{
+        transform: translateY(1px);
+        box-shadow: 0 0px 0px rgba(0,0,0,0.2);
+    }
+    #infoText{
+        line-height: 100px;
+    }
     #infoGrid{
         display: grid;
         width: 80%;
         grid-template-columns: 1fr;
-        grid-template-rows: 50vh 50vh; 
+        grid-template-rows: auto; 
         grid-column-gap: 0vw;
         grid-row-gap: 10vh;
         margin-top: 10vh;
@@ -86,8 +161,9 @@
     }
     .infoCard{
         color: #000;
-        text-align: center;
+        text-align: left;
         align-items: center;
+        
         display: inline;
         flex-direction: column;
         font-family: Darumadrop One;
@@ -100,8 +176,7 @@
         padding-top: 5vh;
         padding-left: 5vw;
         padding-right: 5vw;
-        padding-bottom: 10vh;
-        overflow-y: scroll;
+        padding-bottom: 4vh;
         margin-top: vh;
     }
     .navbarButton {
@@ -211,6 +286,30 @@
         display: none;
     }
 </style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("saveAccount").addEventListener("click", function () {
+            if (document.getElementById("nameInput").value == "" || document.getElementById("addressInput").value == "" || document.getElementById("phoneInput").value == "") {
+                alert("Please fill out all fields");
+            }
+            else {
+                $.ajax({
+                    url: '/api/saveInfo',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({"name": document.getElementById("nameInput").value, "location": document.getElementById("addressInput").value, "phone": document.getElementById("phoneInput").value}),
+                    success: function(response) {
+                        console.log(response);
 
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+        });
+    
+    });
+</script>
 
 </html>
