@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="/style/all.css">
+<body>
+    <div id="navbar">
+        <div>
+            <button id="aboutUs" class = "navbarButton"  onclick="window.location ='/'">About Us</button>
+            <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border" id="aboutUsBorder"></img>
+        </div>
+        <div>
+            <button id="reqFood" class = "navbarButton" onclick="window.location ='/organize'">Request Food</button>
+            <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border hidden" id="reqFoodBorder"></img>
+        </div>
+        <div>
+            <button id="donateFood" class = "navbarButton"  onclick="window.location ='/donate'">Donate Food</button>
+            <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border hidden" id="donateFoodBorder"></img>
+        </div> 
+        
+    </div>
+</body>
+</html>

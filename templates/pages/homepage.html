@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- import all.css -->
+<link rel="stylesheet" href="/style/all.css">
+<body>
+    
+    <div id="frontPage">
+        <div id="mainText">
+            <div id="bigText"> ShareABite</div>
+            <div id="smallText">Feeding people in your community.</div>
+        </div>
+        <div id="navbar">
+            <div>
+                <button id="aboutUs" class = "navbarButton"  onclick="window.location ='/'">About Us</button>
+                <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border" id="aboutUsBorder"></img>
+            </div>
+            <div>
+                <button id="reqFood" class = "navbarButton" onclick="window.location ='/organize'">Request Food</button>
+                <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border hidden" id="reqFoodBorder"></img>
+            </div>
+            <div>
+                <button id="donateFood" class = "navbarButton"  onclick="window.location ='/donate'">Donate Food</button>
+                <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border hidden" id="donateFoodBorder"></img>
+            </div> 
+            
+        </div>
+
+
+        
+        <img src="{{url_for('static', filename='Image/frontPage.png')}}" alt="largeImage" id="largeImage"></img>
+    </div>
+
+    <!-- Here -->
+    <span id="title">Our Mission</span>
+
+    <span id="text">ShareABite is a platform made to combat food waste and hunger by connecting food donors with organizations in need. We provide a seamless platform for individuals and businesses to easily donate excess food, ensuring it reaches those who need it most. Join us in making a difference and nourishing communities together.</span>
+        
+    <div id="boxGrid">
+        <div id="box1" class="box">
+            <button id="donate" class="bigButtons" onclick="window.location='/donate'">Donate Now</button>
+            Donate food to a food bank or shelter near you! Take a picture of your donation and let the AI find the location for you!
+            
+        </div>
+        <div id="box2" class="box">
+            <button id="request" class="bigButtons" onclick="window.location='/organize'">Request Food</button>
+            If you’re an organization accepting food donations, let the donors know what you need and watch the donations  roll in!
+            
+        </div>
+    </div>   
+</body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap');
+    
+    
+    .navbarButton {
+        display: flex;
+        background-color: transparent;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        font-family: "Darumadrop One", cursive;
+        transition: 0.2s;
+        
+    }
+    .navbarButton::selection{
+        display: none;
+    }
+    .navbarButton:hover {
+        transform: translateY(-1px);
+    }
+    .navbarButton:active {
+        transform: translateY(1px);
+    }
+    #aboutUs {
+        box-shadow: white;
+    }
+    
+    #title{
+        text-align: center; 
+        color: #000;
+        font-family: Darumadrop One;
+        font-size: 9vw;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        display: block;
+        margin-top: 3vh;
+    }
+    #bigText{
+        font-size: 9vw;
+        font-weight: 400;
+
+    }
+    #mainText{
+        text-align: center; 
+        color: #ffffff;
+        font-family: Darumadrop One;
+        font-style: normal;
+        line-height: normal;
+        align-self: center;
+        display: block;
+        position: absolute;
+        width: 50vw;
+    }
+    #smallText{
+        font-size: 3vw;
+        font-weight: 400;
+        margin-top: -27px;
+    }
+    #text{
+        text-align: justify;
+        display: flex;
+        color: #000;
+        font-family: Darumadrop One;
+        font-size: 2.5vw;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;    
+        margin-left: 10vw;
+        margin-right: 10vw;
+        /* margin-top: 10vh; */
+    }
+    
+    #boxGrid{
+        display: grid;
+        width: 85%;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 50vh; 
+        grid-column-gap: 7vw;
+        grid-row-gap: 0px;
+        margin-top: 10vh;
+        margin-left: 7.5vw;
+        margin-right: 10vw;
+        margin-bottom: 15vh;
+    }
+    .box{
+        color: #000;
+        text-align: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        font-family: Darumadrop One;
+        font-size: 2vw;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        border: 4px solid #5EAF6B;
+        border-radius: 30px;
+        padding-top: 5vh;
+        padding-left: 5vw;
+        padding-right: 5vw;
+        padding-bottom: 10vh;
+        overflow-y: scroll;
+        margin-top: vh;
+    }
+
+    .bigButtons{
+        border: none;
+        border-radius: 60px;
+        border-color: #5EAF6B;
+        background: #5EAF6B;
+        color: white; 
+        width: 30vw;
+        height: 17vw;
+        font-family: Darumadrop One;
+        font-size: 2vw;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-align: center;
+        margin-bottom: 7vh;
+        transition: 0.3s;
+    }
+    .bigButtons:hover{
+        background: #5EAF6B;
+        transform: translateY(-1px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    .bigButtons:active{
+        transform: translateY(1px);
+        box-shadow: 0 0px 0px rgba(0,0,0,0.2);
+    }
+    
+    
+    #frontPage{
+        height: 60vh;
+        width: 100vw;
+        display: flex;
+        background-color: #5EAF6B;
+        overflow-y: hidden;
+    }
+    #largeImage{
+        display: flex;
+        margin-top: -6vh;
+        left: 0vw;
+        position: sticky;
+        z-index: 1;
+        left: 100vw;
+        width: auto;
+    }
+    #dropShadow{
+        box-shadow: inset 1px 6px 20px rgb(0 0 0);
+        position: absolute;
+    }
+    .hidden{
+        display: none;
+    }
+
+    .box::-webkit-scrollbar{
+        display: none;
+    }
+</style>
+<script>
+    
+    //run when document is loaded
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     for(let element of document.getElementsByClassName("navbarButton") ){
+    //         element.addEventListener("mouseenter", function () {
+    //             for (let i = 0; i < document.getElementsByClassName("border").length; i++) {
+    //                 document.getElementsByClassName("border")[i].classList.add("hidden");
+    //                 console.log("hidden");
+    //             }
+    //             //get the border of the element and remove hidden class
+    //             console.log("sout");
+    //             element.nextElementSibling.classList.remove("hidden");
+    //             console.log(element.nextElementSibling.classList);
+    //             console.log(element.nextElementSibling);    
+    //         });
+    //     }
+    // });
+
+
+
+</script>
+</html>
+

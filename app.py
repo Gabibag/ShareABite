@@ -1,17 +1,25 @@
 import sqlite3
 
 import requests
-from flask import Flask, render_template, request, jsonify, json
+from flask import Flask, render_template, request, jsonify, json, send_file
 import googlemaps
 
 app = Flask(__name__)
-
+import os
+import openai
+import dotenv
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('/pages/homepage.html')
 
+@app.route('/<path:url>', methods=['get'])
+def sendPage(url):
+    # check to see if the file exists, if not, return 404
+    if not os.path.isfile("templates/pages/" + url + ".html"):
+        return "404"
+    return render_template('/pages/' + url + '.html')
 
 @app.route('/api/getFoodTypes', methods=['get'])
 def getFoodTypes():
@@ -19,55 +27,53 @@ def getFoodTypes():
     return [org['food'] for org in
             sqlite3.connect('database.db').cursor().execute("SELECT * FROM organizations").fetchall()]
 
+@app.route("/image/<path:url>", methods=['get'])
+def returnImage(url):
+    print("aaaa")
+    return send_file("static/Image/" + url, mimetype='image/gif')
+
+@app.route("/script/<path:url>", methods=['get'])
+def returnJs(url):
+    return send_file("templates/scripts/" + url)
+@app.route("/style/<path:url>", methods=['get'])
+def returnCSS(url):
+    return send_file("templates/styles/" + url)
+
 
 @app.route('/api/getClosestOrganization', methods=['post'])
 def getDatabase():
-    print("req" + str(request.json))
     food = request.json['food'].lower()
     local = request.json['location'].lower()
-    if food == "":
-        print("no food type specified")
-        return jsonify({'msg': 'no food type specified'}
-                       ), 400
-    if local == "":
-        print("no location specified")
-        return jsonify({'msg': 'no location specified'}
-                       ), 400
-
-    # get organization from database
-    conn = sqlite3.connect('database.sqlite')
-    cur = conn.cursor()
-    organizations = cur.execute("SELECT * FROM main.organizations").fetchall()
-    conn.close()
+    print(food)
+    print(local)
+    organizations = sqlite3.connect('database.sqlite').cursor().execute("SELECT * FROM main.organizations").fetchall()
     orgs = []
-    print(organizations)
+    st = ""
     for org in organizations:
         if org[2] == food or org[2] == "":
             orgs.append(org)
-
+            print(org)
+            st += str(org[0]) + "\n"
     if len(orgs) == 0:
-        return
-
-    orgsdist = []
-    for org in orgs:
-        get = getClosestOrg(local, org[1]).get('duration').get('text')
-        print(get)
-        orgsdist.append({org[0], get})
-    # sort orgdist by distance, the smaller the distance, the closer it is. orgsdist[0] is the distance each org is
-    # from you
-
-    print(orgsdist)
-
-    print(orgsdist[0])
-    st = ""
-    nums = ["1,", "2,", "3,", "4,", "5,", "6,", "7,", "8,", "9,", "0,"]
-    for org in orgsdist:
-        str1 = list(org)[0]
-        str2 = list(org)[1]
-        if any(str in nums for str2 in nums):
-            st += str(list(org)[0] + " is " + list(org)[1] + " from you") + "\n"
-        else:
-            st += str(list(org)[1] + " is " + list(org)[0] + " from you") + "\n"
+        return "No organizations found"
+    
+    try:
+        orgsdist = []
+        for org in orgs:
+            get = getClosestOrg(local, org[1]).get('duration').get('text')
+            print(get)
+            orgsdist.append({org[0], get})
+        
+        nums = ["1,", "2,", "3,", "4,", "5,", "6,", "7,", "8,", "9,", "0,"]
+        for org in orgsdist:
+            str1 = list(org)[0]
+            str2 = list(org)[1]
+            if any(str in nums for str2 in nums):
+                st += str(list(org)[0] + " is " + list(org)[1] + " from you") + "\n"
+            else:
+                st += str(list(org)[1] + " is " + list(org)[0] + " from you") + "\n"
+    except:
+        st += "\nTime unavailable"
 
     print(st)
     return st
@@ -76,32 +82,28 @@ def getDatabase():
 @app.post('/api/imageRec')
 def imageRec():
     file = request.files['file']
-    # file should be an image
-
-    # return format:
-    # return jsonify({'msg': '{content of image}'})
-    return
+    dotenv.load_dotenv()
+    openai.api_key = os.getenv('key')
+    result = file.read()
+    food = getFoodTypes()  # returns foods that organizations are asking for
+    for x in result:
+        food += x[1] + " "
+    completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user",
+             "content": "In this sentence pick out the name of the every main food item: "
+                        + str(food) + ". Only return the name of the food items and nothing else. for example 'beef stew', "
+                        "'carrots', 'spinach'"}
+        ]
+    )
+    return completion.choices[0].message.content.split(",")
 
 
 def getClosestOrg(loc1, loc2):
-    api_key = 'AIzaSyB6XaktjH_OGhA2EbGHAYydW61Qqnv3Hkk'
-    source = loc1
-    dest = loc2
-    gmaps = googlemaps.Client(key='AIzaSyB6XaktjH_OGhA2EbGHAYydW61Qqnv3Hkk')
-
-    # Requires cities name
-    my_dist = gmaps.distance_matrix(loc1, loc2)['rows'][0]['elements'][0]
-
-    # Printing the result
-    print(my_dist)
-    # url = 'https://maps.googleapis.com/maps/api/distancematrix/json?'
-    # x = requests.get(url + 'origins = ' + source +
-    #                  '&destinations = ' + dest +
-    #                  '&key = ' + api_key).json()
-    # print(x)
-
-    return my_dist
+    return googlemaps.Client(key='[redacted]').distance_matrix(loc1, loc2)['rows'][0]['elements'][0]
 
 
 if __name__ == '__main__':
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.run()

@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap');
+#navbar {
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    justify-content: left;
+    align-items: last baseline;
+    background-color: #5EAF6B;
+    padding: 0px;
+    width: 100vw;
+
+    
+}
+.navbarButton {
+    display: flex;
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: "Darumadrop One", cursive;
+    transition: 0.2s;
+    
+}
+.navbarButton::selection{
+    display: none;
+}
+.navbarButton:hover {
+    transform: translateY(-1px);
+}
+.navbarButton:active {
+    transform: translateY(1px);
+}
+
+.border{
+    position: absolute;
+    /* margin-left: 1.4vw; */
+    top: 1vh;
+    
+    
+    height: 34px;
+    z-index: -1;
+}
+#aboutUsBorder{
+    left: 1.3px;
+    width: 100px;
+}
+
+#donateFoodBorder{
+    left: 247.3px;
+    width: 101px;
+}
+#reqFoodBorder{
+    left: 113px;
+    width: 110px;
+
+}
+
+.hidden
+{
+    display: none;
+}
+body{
+    margin: 0;
+    }
+body::-webkit-scrollbar{
+    display: none;
+}
