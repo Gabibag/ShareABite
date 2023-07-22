@@ -25,12 +25,12 @@
             <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border hidden" id="aboutUsBorder"></img>
         </div>
         <div>
-            <button id="reqFood" class = "navbarButton" onclick="window.location ='/organize'">Request Food</button>
-            <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border hidden" id="reqFoodBorder"></img>
+            <button id="donateFood" class = "navbarButton"  onclick="window.location ='/donate'">Donate Food</button>
+            <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border hidden" id="donateFoodBorder"></img>
         </div>
         <div>
-            <button id="donateFood" class = "navbarButton"  onclick="window.location ='/donate'">Donate Food</button>
-            <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border" id="donateFoodBorder"></img>
+            <button id="reqFood" class = "navbarButton" onclick="window.location ='/organize'">Request Food</button>
+            <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border" id="reqFoodBorder"></img>
         </div> 
         
     </div>
@@ -56,12 +56,7 @@
         width: 85%;
         grid-template-columns: 1fr;
         grid-template-rows: 50vh 50vh; 
-        grid-column-gap: 0vw;
-        grid-row-gap: 10vh;
-        margin-top: 10vh;
-        margin-left: 7.5vw;
-        margin-right: 10vw;
-        margin-bottom: 15vh;
+        margin: 10vh 10vw 15vh 7.5vw;
     }
     .infoCard{
         color: #000;
@@ -75,7 +70,7 @@
         font-weight: 400;
         line-height: normal;
         border: 4px solid #5EAF6B;
-        border-radius: 30px;
+        border-radius: 3vw;
         padding-top: 5vh;
         padding-left: 5vw;
         padding-right: 5vw;

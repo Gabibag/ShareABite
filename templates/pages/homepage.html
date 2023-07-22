@@ -20,13 +20,13 @@
                 <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border" id="aboutUsBorder"></img>
             </div>
             <div>
-                <button id="reqFood" class = "navbarButton" onclick="window.location ='/organize'">Request Food</button>
-                <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border hidden" id="reqFoodBorder"></img>
-            </div>
-            <div>
                 <button id="donateFood" class = "navbarButton"  onclick="window.location ='/donate'">Donate Food</button>
                 <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border hidden" id="donateFoodBorder"></img>
             </div> 
+            <div>
+                <button id="reqFood" class = "navbarButton" onclick="window.location ='/organize'">Request Food</button>
+                <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border hidden" id="reqFoodBorder"></img>
+            </div>
             
         </div>
 
@@ -36,26 +36,39 @@
     </div>
 
     <!-- Here -->
-    <span id="title">Our Mission</span>
+    <div id="startGrid"> 
+        <div>
+            <span id="title">Our Mission</span>
 
-    <span id="text">ShareABite is a platform made to combat food waste and hunger by connecting food donors with organizations in need. We provide a seamless platform for individuals and businesses to easily donate excess food, ensuring it reaches those who need it most. Join us in making a difference and nourishing communities together.</span>
+            <span id="text">ShareABite is a platform made to combat food waste and hunger by connecting food donors with organizations in need. We provide a seamless platform for individuals and businesses to easily donate excess food, ensuring it reaches those who need it most. Join us in making a difference and nourishing communities together.</span>
+                
+        </div>
         
-    <div id="boxGrid">
-        <div id="box1" class="box">
-            <button id="donate" class="bigButtons" onclick="window.location='/donate'">Donate Now</button>
-            Donate food to a food bank or shelter near you! Take a picture of your donation and let the AI find the location for you!
+        <div id="boxGrid">
+            <div id="box1" class="box">
+                <span id="dwd" class="question"> Do you want to donate food? </span>
+                Donate food to a food bank or shelter near you! Take a picture of your donation and let the AI find the location for you!
+                <button id="donate" class="bigButtons button" onclick="window.location='/donate'">Donate Now</button>
             
+            </div>
+            <div id="box2" class="box">
+                <span id="dwr" class="question"> Do you want to request food? </span>
+                If you’re an organization accepting food donations, let the donors know what you need and watch the donations roll in!
+                <button id="request" class="bigButtons button" onclick="window.location='/organize'">Request Food</button>
+                
+            </div>
         </div>
-        <div id="box2" class="box">
-            <button id="request" class="bigButtons" onclick="window.location='/organize'">Request Food</button>
-            If you’re an organization accepting food donations, let the donors know what you need and watch the donations  roll in!
-            
-        </div>
-    </div>   
+    </div>
+
 </body>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap');
-    
+    #startGrid{
+        display: grid;
+        grid-template-rows: 50vh;
+        grid-template-columns: 45vw 45vw; 
+
+
+    }
     
     .navbarButton {
         display: flex;
@@ -81,18 +94,21 @@
     }
     #aboutUs {
         box-shadow: white;
+        
     }
     
     #title{
-        text-align: center; 
+        text-align: left; 
         color: #000;
-        font-family: Darumadrop One;
-        font-size: 9vw;
+        font-family: "Fredoka", sans-serif;
+        font-size: 4vw;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 600;
         line-height: normal;
         display: block;
         margin-top: 3vh;
+        margin-left: 2vw;
+        margin-bottom: 2vw;
     }
     #bigText{
         font-size: 9vw;
@@ -119,65 +135,52 @@
         text-align: justify;
         display: flex;
         color: #000;
-        font-family: Darumadrop One;
-        font-size: 2.5vw;
+        font-family: "Fredoka", sans-serif;
+        font-size: 2vw;
         font-style: normal;
         font-weight: 400;
         line-height: normal;    
-        margin-left: 10vw;
-        margin-right: 10vw;
+        margin-left: 2vw;
+        width: 90%;
         /* margin-top: 10vh; */
     }
     
     #boxGrid{
+        margin-top: 4vw;
         display: grid;
-        width: 85%;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 50vh; 
-        grid-column-gap: 7vw;
-        grid-row-gap: 0px;
-        margin-top: 10vh;
-        margin-left: 7.5vw;
-        margin-right: 10vw;
-        margin-bottom: 15vh;
+        width: 100%;
+        grid-template-columns: 52% 52%;
+        grid-template-rows: max-content; 
+        grid-column-gap: 10%;
     }
     .box{
         color: #000;
-        text-align: center;
+        text-align: left;
         align-items: center;
         display: flex;
         flex-direction: column;
-        font-family: Darumadrop One;
-        font-size: 2vw;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+        font-family: "Fredoka", sans-serif;
+        font-size: 1.25vw;
         border: 4px solid #5EAF6B;
-        border-radius: 30px;
-        padding-top: 5vh;
-        padding-left: 5vw;
-        padding-right: 5vw;
-        padding-bottom: 10vh;
+        border-radius: 3vw;
+        padding: 1vw;
         overflow-y: scroll;
-        margin-top: vh;
+        width: 100%;
+        height: 100%;
     }
 
+    .question{
+        font-size: 1.75vw;
+        font-weight: 500;
+        margin-bottom: 2vw;
+        margin-top: 1vw;
+    }
     .bigButtons{
-        border: none;
-        border-radius: 60px;
-        border-color: #5EAF6B;
-        background: #5EAF6B;
-        color: white; 
-        width: 30vw;
-        height: 17vw;
-        font-family: Darumadrop One;
-        font-size: 2vw;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        text-align: center;
-        margin-bottom: 7vh;
-        transition: 0.3s;
+        margin-top: 12%;
+        margin-bottom: 12%;
+        width: 90%;
+        height: 25%;
+        /*height: clamp(5%, 5vh + 50px,100%);*/
     }
     .bigButtons:hover{
         background: #5EAF6B;
@@ -191,7 +194,7 @@
     
     
     #frontPage{
-        height: 60vh;
+        height: 50vh;
         width: 100vw;
         display: flex;
         background-color: #5EAF6B;
@@ -217,6 +220,41 @@
     .box::-webkit-scrollbar{
         display: none;
     }
+
+    @media (max-width: 768px) {
+        #startGrid {
+            grid-template-columns: 100%; /* Stack columns vertically */
+            grid-template-rows: max-content; 
+            margin-bottom: 10vh;
+        }
+
+        #boxGrid {
+            grid-template-columns: 60%; /* Stack columns vertically */
+            grid-row-gap: 5vh;
+            
+        }
+
+        .box {
+            /* margin-bottom: 5%; */
+            font-size: 2vw; /* Reduce font size for better readability on smaller viewports */
+            padding: 1vh 1vw; /* Add some spacing between stacked boxes */
+            margin-left: 27.5%;
+        }
+
+        .bigButtons {
+            width: 70%; /* Adjust button width for better display on smaller viewports */
+            height: auto; /* Let button height adjust based on content */
+            padding: 2vh 2vw;
+            margin-bottom: 0.5vh;
+            margin-top: 5vh;
+        }
+
+        .question{
+            font-size: 2.5vw;
+        }
+    }
+
+    
 </style>
 <script>
     

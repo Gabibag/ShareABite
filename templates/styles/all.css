@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap');
 #navbar {
     display: flex;
     position: fixed;
@@ -49,11 +50,11 @@
 }
 
 #donateFoodBorder{
-    left: 247.3px;
+    left: 244.3px;
     width: 101px;
 }
 #reqFoodBorder{
-    left: 113px;
+    left: 112px;
     width: 110px;
 
 }
@@ -67,4 +68,76 @@ body{
     }
 body::-webkit-scrollbar{
     display: none;
+}
+
+.button{
+    border: none;
+    border-radius: 60px;
+    border-color: #5EAF6B;
+    background: #5EAF6B;
+    color: white; 
+    font-family: "Fredoka", serif;
+    font-weight: 500;
+    font-size: 2vw;
+    text-align: center;
+    
+    transition: 0.2s;
+    transition-property: transform, box-shadow;
+}
+.button:hover{
+    background: #5EAF6B;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+.button:active{
+    transform: translateY(1px);
+    box-shadow: 0 0px 0px rgba(0,0,0,0.2);
+}
+
+.inputInfo{
+    border: none;
+    border-bottom: #5EAF6B solid;
+    font-size: 2vw;
+    font-family: "Fredoka", serif;
+    transition: 0.2s;
+    text-emphasis-position: center;
+    text-overflow: ellipsis;
+
+}
+.inputInfo:focus{
+    outline: none;
+    background-color:#cce0d0;
+    width: fit-content;
+    
+}
+.boxInput{
+    border-left:#5EAF6B solid;
+    border-right:#5EAF6B solid;
+    border-top:#5EAF6B solid;
+    border-radius: 30px;
+    border-width: 4px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input:invalid {
+    border-bottom: #f67a7a solid;
+}
+input[type="text"] {
+    padding-left: 30px;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+text{
+    font-family: "Fredoka", sans-serif;
+    font-size: 1.5vw;
+}
+
+text{
+    font-family: "Fredoka", serif;
 }

@@ -21,12 +21,14 @@
                 <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border hidden" id="aboutUsBorder"></img>
             </div>
             <div>
-                <button id="reqFood" class = "navbarButton" onclick="window.location ='/organize'">Request Food</button>
-                <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border" id="reqFoodBorder"></img>
+                <button class="navbarButton" id="donateFood" onclick="window.location ='/donate'">Donate Food</button>
+                <img alt="border" class="border " id="donateFoodBorder"
+                     src="{{url_for('static', filename='Image/buttonBorder.svg')}}"></img>
             </div>
             <div>
-                <button id="donateFood" class = "navbarButton"  onclick="window.location ='/donate'">Donate Food</button>
-                <img src="{{url_for('static', filename='Image/buttonBorder.svg')}}" alt="border" class="border hidden" id="donateFoodBorder"></img>
+                <button class="navbarButton" id="reqFood" onclick="window.location ='/organize'">Request Food</button>
+                <img alt="border" class="border hidden" id="reqFoodBorder"
+                     src="{{url_for('static', filename='Image/buttonBorder.svg')}}"></img>
             </div> 
             
         </div>
@@ -34,100 +36,104 @@
     </div>
 
     <div id="infoGrid">
-        <div id="info1" class="infoCard">
-            <div id="infoText">
-                Name of Organization: <input id="nameInput" class="inputInfo"> <br>
-                Address: <input id="addressInput" class="inputInfo"> <br>
-                Phone: <input id="phoneInput" class="inputInfo"> <br>
+        <span class="sectionText">Organization Information</span>
+            <div id="info1" class="infoCard">
+                <div id="infoText">
+                    Name of Organization: <input id="nameInput" class="inputInfo"> <br>
+                    Address: <input id="addressInput" class="inputInfo"> <br>
+                    Phone: <input id="phoneInput" class="inputInfo" type="number"> <br>
+                    Contact Name: <input class="inputInfo" id="contactName"> <br>
+                    Contact Email: <input class="inputInfo" id="contactEmail" type="email"> <br>
+                </div>
             </div>
-            <div id="buttonContainer">
-                <button id="saveInfo" class = "save">Save Info</button>
-                <button id="saveAccount" class = "save">Save info to Account</button>
-            </div>
-            
-        </div>
-        <div id="info2" class="infoCard">
-            <div id="infoText">
-                Food Category: <input id="categoryInput" class="inputInfo"> 
-                <span id="quantity">Quantity:</span> <input id="quantityInput" class="inputInfo"> <br>
-                <span id="desc">Description:</span> <input id="descInput" class="inputInfo"> <br>
-                <div id="check"> </div>
-                Will accept other donations as well. <br>
-            </div>
-            
-                <button id="submit" class="save">Submit</button>
-               
-            
-        </div>
-    </div>   
+        <br>
+        <span class="sectionText">Food Acceptance Criteria</span>
+        <textarea class="inputInfo boxInput" id="description" onkeyup="textAreaAdjust(this)"
+                  placeholder="Information on what types of food you will accept, "></textarea>
+        <button class="save button" id="saveAccount">Save</button>
+    </div>
 
 </body>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap');
-    
 
-
-    .inputInfo{
-        border: none;
-        border-bottom: #5EAF6B solid;
-        font-size: 2vw;
-        font-family: "Darumadrop One", cursive;
-        transition: 0.2s;
+    .sectionText {
+        color: #000;
+        font-family: "Fredoka", cursive;
+        font-size: 5vw;
+        display: block;
     }
-    #categoryInput{
+
+    #description {
+        width: 97%;
+        min-height: 10vh;
+        height: max-content;
+        overflow-y: visible;
+        border: 4px solid #5EAF6B;
+        border-radius: 30px;
+        resize: none;
+        padding: 1%;
+    }
+
+    #submit {
+        width: 100%;
+        height: 12%;
+        /* margin-top: 5vh; */
+    }
+
+    #categoryInput {
         width: 55%;
     }
-    #quantityInput{
-        border-left:#5EAF6B solid;
-        border-right:#5EAF6B solid;
-        border-top:#5EAF6B solid;
-        border-radius: 30px;
+
+    #quantityInput {
         width: 10%;
+        text-align: center;
+        /* remove up down button markers */
+        --wekbit-appearance: none;
+
     }
-    #descInput{
-        border-left:#5EAF6B solid;
-        border-right:#5EAF6B solid;
-        border-top:#5EAF6B solid;
-        border-radius: 30px;
-        width: 80%;
+
+    #descInput {
+        width: 82.5%;
         height: 10vw;
+
+
     }
-    #nameInput{
+
+    #nameInput {
         width: 69%;
     }
-    #addressInput{
+
+    #addressInput {
         width: 87.1%;
     }
-    #phoneInput{
+
+    #phoneInput {
         width: 89.3%;
     }
-    .inputInfo:focus{
-        outline: none;
-        background-color:#cce0d0;
+
+    #contactName {
+        width: 79%;
     }
-    #desc{
+
+    #contactEmail {
+        width: 79.2%;
+    }
+
+    #desc {
         vertical-align: text-bottom;
-        
     }
-    .save{
-        border: none;
-        border-radius: 60px;
-        border-color: #5EAF6B;
-        background: #5EAF6B;
-        color: white; 
-        width: 45%;
-        height: 20%;
-        font-family: Darumadrop One;
-        font-size: 2vw;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        text-align: center;
-        margin-left: 3%;
-        transition: 0.3s;
+
+    .save {
+        width: 90%;
+        margin-top: 5vh;
+        height: clamp(5vh, 10vw, 10vh);
+        margin-left: 5%;
+        margin-right: 5%;
     }
-    #buttonContainer{
+
+    #buttonContainer {
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -135,44 +141,34 @@
         vertical-align: bottom;
 
     }
-    .save:hover{
-        background: #5EAF6B;
-        transform: translateY(-1px);
-        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    }
-    .save:active{
-        transform: translateY(1px);
-        box-shadow: 0 0px 0px rgba(0,0,0,0.2);
-    }
+
     #infoText{
         line-height: 100px;
+        font-family: "Fredoka", serif;
     }
-    #infoGrid{
+    #infoGrid {
         display: grid;
         width: 80%;
         grid-template-columns: 1fr;
-        grid-template-rows: auto; 
-        grid-column-gap: 0vw;
-        grid-row-gap: 10vh;
-        margin-top: 10vh;
-        margin-left: 10vw;
-        margin-right: 10vw;
-        margin-bottom: 15vh;
+        grid-template-rows: auto;
+        /*grid-row-gap: 10vh;*/
+        margin: 10vh 10vw 15vh;
     }
     .infoCard{
         color: #000;
         text-align: left;
         align-items: center;
-        
+
+
         display: inline;
         flex-direction: column;
-        font-family: Darumadrop One;
+        font-family: "Ferdoka One", sans-serif;
         font-size: 2vw;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
         border: 4px solid #5EAF6B;
-        border-radius: 30px;
+        border-radius: 3vw;
         padding-top: 5vh;
         padding-left: 5vw;
         padding-right: 5vw;
@@ -287,29 +283,74 @@
     }
 </style>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("saveAccount").addEventListener("click", function () {
-            if (document.getElementById("nameInput").value == "" || document.getElementById("addressInput").value == "" || document.getElementById("phoneInput").value == "") {
-                alert("Please fill out all fields");
-            }
-            else {
-                $.ajax({
-                    url: '/api/saveInfo',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({"name": document.getElementById("nameInput").value, "location": document.getElementById("addressInput").value, "phone": document.getElementById("phoneInput").value}),
-                    success: function(response) {
-                        console.log(response);
+    //adjusts the height of the text area to fit the text
+    function textAreaAdjust(o) {
 
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
-                });
-            }
-        });
-    
+    }
+
+    document.getElementById("saveAccount").addEventListener("click", function () {
+        if (isValid() && isValidEmail()) {
+            alert("Please fill out all fields");
+        } else {
+            console.log(isValid() + " " + isValidEmail());
+            $.ajax({
+                url: '/api/saveInfo',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "name": document.getElementById("nameInput").value,
+                    "location": document.getElementById("addressInput").value,
+                    "phone": document.getElementById("phoneInput").value
+                }),
+                success: function (response) {
+                    document.cookie = "name=" + document.getElementById("nameInput").value;
+                    document.cookie = "location=" + document.getElementById("addressInput").value;
+                    document.cookie = "phone=" + document.getElementById("phoneInput").value;
+                    document.cookie = "contactName=" + document.getElementById("contactName").value;
+                    document.cookie = "contactEmail=" + document.getElementById("contactEmail").value;
+                    document.cookie = "description=" + document.getElementById("description").value;
+                    console.log(response);
+
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
     });
+    //check if user has cookies for name, location, and phone, if they do, autofill the fields
+    if (document.cookie.indexOf("name") !== -1) {
+        document.getElementById("nameInput").value = document.cookie.split("name=")[1].split(";")[0];
+    }
+    if (document.cookie.indexOf("location") !== -1) {
+        document.getElementById("addressInput").value = document.cookie.split("location=")[1].split(";")[0];
+    }
+    if (document.cookie.indexOf("phone") !== -1) {
+        document.getElementById("phoneInput").value = document.cookie.split("phone=")[1].split(";")[0];
+    }
+    if (document.cookie.indexOf("contactName") !== -1) {
+        document.getElementById("contactName").value = document.cookie.split("contactName=")[1].split(";")[0];
+    }
+    if (document.cookie.indexOf("contactEmail") !== -1) {
+        document.getElementById("contactEmail").value = document.cookie.split("contactEmail=")[1].split(";")[0];
+    }
+    if (document.cookie.indexOf("description") !== -1) {
+        document.getElementById("description").value = document.cookie.split("description=")[1].split(";")[0];
+    }
+    console.log(document.getElementById("contactEmail").value);
+    function isValid(){
+        //check if any of the fields are empty, if it is return false
+        console.log(document.getElementById("nameInput").value === "" || document.getElementById("addressInput").value === "" || document.getElementById("phoneInput").value === "" || document.getElementById("contactName").value === "" || document.getElementById("contactEmail").value === "" || document.getElementById("description").value === "")
+        return !(document.getElementById("nameInput").value === "" || document.getElementById("addressInput").value === "" || document.getElementById("phoneInput").value === "" || document.getElementById("contactName").value === "" || document.getElementById("contactEmail").value === "" || document.getElementById("description").value === "");
+    }
+    function isValidEmail(){
+        let email = document.getElementById("contactEmail").value
+        console.log("email: " + !(email.indexOf("@") === -1 || email.indexOf(".") === -1))
+        return (email.indexOf("@") === -1 || email.indexOf(".") === -1);
+
+
+    }
+
 </script>
 
 </html>
